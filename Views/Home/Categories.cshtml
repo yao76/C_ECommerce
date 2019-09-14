@@ -1,0 +1,40 @@
+@model Category
+<div class="row">
+    <div class="col offset-2">
+        <h1 class="display-4"><a href="/products">Products </a> | </h1>
+    </div>
+    <div class="col-7">
+        <h1 class="display-4">Categories</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col newcat">
+        <div class="text-center">
+            <h3>New Category</h3>
+        </div>
+    </div>
+    <div class="col existingproducts">
+        <h3>Existing Categories</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 offset-1 form">
+        <form asp-action="NewCategory" asp-controller="Home" method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div class="col-5">
+                    <input asp-for="Name" class="form-control" type="text">
+                </div>
+            </div>
+            <span class="text-danger" asp-validation-for="Name"></span>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div class="col ">
+        @foreach(var cat in @ViewBag.allcategories)
+        {
+            <a href="/categories/@cat.CategoryId">@cat.Name</a><br>
+        }
+    </div>
+</div>

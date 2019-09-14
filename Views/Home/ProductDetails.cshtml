@@ -1,0 +1,36 @@
+@model Wrapper
+<div class="row">
+    <div class="col-5">
+        <a href="/products">Products</a>
+    </div>
+    <div class="col">
+        <h1>@Model.OneProduct.Name</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <p>Categories</p>
+        @foreach(var cat in @Model.OneProduct.Associated)
+        {
+            @cat.Category.Name
+            <br>
+        }
+    </div>
+    <div class="col">
+        <form asp-action="AddCategory" asp-controller="Home" asp-route-id="@Model.OneProduct.ProductId" method="post">
+            <div class="form-group">
+                <label for="dojo" class="form-label">Add Category:</label>
+                <div class="col-6">
+                    <select class="form-control" name="categoryId">
+                        @foreach(Category cat in @ViewBag.UnAssociatedCategories)
+                        {
+                            <option value="@cat.CategoryId">@cat.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+    </div>
+</div>
